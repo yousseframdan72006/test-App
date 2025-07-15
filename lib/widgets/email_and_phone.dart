@@ -5,27 +5,35 @@ import 'package:flutter_svg/svg.dart';
 class EmailAndPhone extends StatelessWidget {
   final String iconPath;
   final String text;
-  const EmailAndPhone({Key? key, required this.iconPath, required this.text})
-    : super(key: key);
+  final VoidCallback? onTap;
+  const EmailAndPhone({
+    Key? key,
+    required this.iconPath,
+    required this.text,
+    this.onTap,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SvgPicture.asset(iconPath),
-          SizedBox(width: 10),
-          Text(
-            text,
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'Cairo',
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
+      child: InkWell(
+        onTap: onTap,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SvgPicture.asset(iconPath),
+            SizedBox(width: 10),
+            Text(
+              text,
+              style: TextStyle(
+                color: Colors.white,
+                fontFamily: 'Cairo',
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

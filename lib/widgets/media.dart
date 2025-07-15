@@ -5,26 +5,34 @@ import 'package:flutter_svg/flutter_svg.dart';
 class Media extends StatelessWidget {
   final String IconPath;
   final String text;
-  const Media({Key? key, required this.IconPath, required this.text})
-    : super(key: key);
+  final VoidCallback? onTap;
+  const Media({
+    Key? key,
+    required this.IconPath,
+    required this.text,
+    this.onTap,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Stack(
-          children: [
-            CircleAvatar(
-              backgroundColor: Color(0xff110b3a),
-              radius: 40,
-              child: SvgPicture.asset(IconPath),
-            ),
-          ],
-        ),
-        SizedBox(height: 10),
-        Text(text, style: TextStyle(color: Colors.white)),
-      ],
+    return InkWell(
+      onTap: onTap,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Stack(
+            children: [
+              CircleAvatar(
+                backgroundColor: Color(0xff110b3a),
+                radius: 40,
+                child: SvgPicture.asset(IconPath),
+              ),
+            ],
+          ),
+          SizedBox(height: 10),
+          Text(text, style: TextStyle(color: Colors.white)),
+        ],
+      ),
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_project/logic/scroll.dart';
 import 'package:test_project/my_colors/my_colors.dart';
 import 'package:test_project/widgets/contact_us.dart' show ContactUs;
 import 'package:test_project/widgets/coulmn_our_services.dart'
@@ -15,6 +16,12 @@ class Index extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey connect = GlobalKey();
+    final GlobalKey ourBusiness = GlobalKey();
+    final GlobalKey whoAreWeKey = GlobalKey();
+    final GlobalKey ourServicesKey = GlobalKey();
+    final GlobalKey home = GlobalKey();
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -30,15 +37,30 @@ class Index extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              HoverText(text: "التواصل"),
+                              GestureDetector(
+                                onTap: () => scrollToSection(connect),
+                                child: HoverText(text: "التواصل"),
+                              ),
                               SizedBox(width: 30),
-                              HoverText(text: "اعمالنا"),
+                              GestureDetector(
+                                onTap: () => scrollToSection(ourBusiness),
+                                child: HoverText(text: "اعمالنا"),
+                              ),
                               SizedBox(width: 30),
-                              HoverText(text: "من نحن"),
+                              GestureDetector(
+                                onTap: () => scrollToSection(whoAreWeKey),
+                                child: HoverText(text: "من نحن"),
+                              ),
                               SizedBox(width: 30),
-                              HoverText(text: "خدماتنا"),
+                              GestureDetector(
+                                onTap: () => scrollToSection(ourServicesKey),
+                                child: HoverText(text: "خدماتنا"),
+                              ),
                               SizedBox(width: 30),
-                              HoverText(text: "الرئيسية"),
+                              GestureDetector(
+                                onTap: () => scrollToSection(home),
+                                child: HoverText(text: "الرئيسية"),
+                              ),
                             ],
                           ),
                         ),
@@ -50,9 +72,10 @@ class Index extends StatelessWidget {
                       ],
                     ),
                     SizedBox(height: 80),
-                    ImageAndTitleText(),
+                    ImageAndTitleText(key: home),
                     SizedBox(height: 40),
                     Text(
+                      key: ourServicesKey,
                       "خدماتنا",
                       style: TextStyle(
                         color: Colors.white,
@@ -67,6 +90,7 @@ class Index extends StatelessWidget {
 
                     SizedBox(height: 40),
                     Text(
+                      key: ourBusiness,
                       "اعمالنا تتحدث",
                       style: TextStyle(
                         color: Colors.white,
@@ -120,6 +144,7 @@ class Index extends StatelessWidget {
               ),
               SizedBox(height: 30),
               Text(
+                key: whoAreWeKey,
                 "من نحن",
                 style: TextStyle(
                   color: Colors.white,
@@ -132,7 +157,7 @@ class Index extends StatelessWidget {
               WhoAreWe(),
               SizedBox(height: 30),
 
-              ContactUs(),
+              ContactUs(key: connect),
               SizedBox(height: 60),
               Text(
                 "Codexus 2025 جميع الحقوق محفوظه ",
